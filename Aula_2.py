@@ -12,15 +12,12 @@ chave_privada = rsa.generate_private_key(
     backend=default_backend()
 )
 
-print(chave_privada)
 chave_publica = chave_privada.public_key()
-print(chave_publica)
 
 
 imagem_original = open('Lighthouse.jpg', 'rb').read()
 
 chave_simetrica = Fernet.generate_key()
-print(chave_simetrica)
 
 cripto = Fernet(chave_simetrica)
 imagem_encriptada = cripto.encrypt(imagem_original)
@@ -42,7 +39,6 @@ chave_sim_cript = chave_publica.encrypt(
 # apagando a chave simétrica
 del chave_simetrica
 # Resta apenas a chave simétrica criptografada e protegida!
-print(chave_sim_cript)
 
 # Recuperando a chave simétrica
 chave_sim_rec = chave_privada.decrypt(
@@ -54,12 +50,11 @@ chave_sim_rec = chave_privada.decrypt(
         label=None
     )
 )
-print(chave_sim_rec)
 
 cripto = Fernet(chave_sim_rec)
-with open('imagem_encriptada_rsa.jpg', 'r') as img_enc:
+with open('imagem_encriptada_rsa.jpg', 'rb') as img_enc:
    with open('imagem_recuperada_rsa.jpg', 'wb') as img_rec:
-       conteudo = cripto.decrypt(str.encode(img_enc.read()))
-img_rec.write(conteudo)
+       conteudo = cripto.decrypt((img_enc.read()))
+       img_rec.write(conteudo)
 
-
+#criptografia com RSA

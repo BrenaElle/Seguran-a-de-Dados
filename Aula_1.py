@@ -18,9 +18,9 @@ imagem_encriptada = cripto.encrypt(imagem_original)
 with open('imagem_encriptada.jpg', 'wb') as f:
     f.write(imagem_encriptada)
 
-with open('imagem_encriptada.jpg', 'r') as img_enc:
+with open('imagem_encriptada.jpg', 'rb') as img_enc:
     with open('imagem_recuperada.jpg', 'wb') as img_rec:
-        conteudo = cripto.decrypt(str.encode(img_enc.read()))
+        conteudo = cripto.decrypt(img_enc.read())
         img_rec.write(conteudo)
 
 #Criptografia com Aes, é para uma imagem mais segura, sendo necessário ter no computador
